@@ -1,0 +1,166 @@
+<html>
+
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="./libgif.js"></script>
+    <script type="text/javascript" src="./rubbable.js"></script>
+</head>
+
+<body>
+    <p>商店的<strong>關於我們</strong>頁面是非常重要的，因此顧客將通過瀏覽此頁面來瞭解您的商店。此頁面的內容可以包括以下部分：</p>
+
+    <ul>
+        <li>介紹您的公司</li>
+        <li>商店主要銷售商品類型</li>
+        <li>公司地址</li>
+    </ul>
+
+    <p>請進入後台管理的<a href="/admin/pages">頁面&amp;部落格</a>，修改此頁面內容。</p>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <img class="image" id="gif0" data-src="./1-2.gif" >
+    <br>
+    <ul>
+        <li>介紹您的公司</li>
+        <li>商店主要銷售商品類型</li>
+        <li>公司地址</li>
+        <li>介紹您的公司</li>
+        <li>商店主要銷售商品類型</li>
+        <li>公司地址</li>
+        <li>介紹您的公司</li>
+        <li>商店主要銷售商品類型</li>
+        <li>公司地址</li>
+        <li>介紹您的公司</li>
+        <li>商店主要銷售商品類型</li>
+        <li>公司地址</li>
+    </ul>
+    <img class="image" id="gif1" data-src="./2-2.gif">
+    <br>
+    <img class="image" id="gif2" data-src="./3-2.gif">
+    <br>
+    <ul>
+        <li>介紹您的公司</li>
+        <li>商店主要銷售商品類型</li>
+        <li>公司地址</li>
+        <li>介紹您的公司</li>
+        <li>商店主要銷售商品類型</li>
+        <li>公司地址</li>
+        <li>介紹您的公司</li>
+        <li>商店主要銷售商品類型</li>
+        <li>公司地址</li>
+        <li>介紹您的公司</li>
+        <li>商店主要銷售商品類型</li>
+        <li>公司地址</li>
+    </ul>
+    <img class="image" id="gif3" data-src="./4-2.gif" />
+    <ul>
+        <li>介紹您的公司</li>
+        <li>商店主要銷售商品類型</li>
+        <li>公司地址</li>
+        <li>介紹您的公司</li>
+        <li>商店主要銷售商品類型</li>
+        <li>公司地址</li>
+        <li>介紹您的公司</li>
+        <li>商店主要銷售商品類型</li>
+        <li>公司地址</li>
+        <li>介紹您的公司</li>
+        <li>商店主要銷售商品類型</li>
+        <li>公司地址</li>
+    </ul>
+    <img class="image" id="gif4" data-src="./5-2.gif">
+</body>
+<style>
+    .image {
+        width: 100%;
+    }
+</style>
+<script type="text/javascript">
+    // 選到頁面中帶有 data-src 屬性的所有元素
+    const images = document.querySelectorAll('[data-src]')
+    let isGifInit = [];
+    let gifId = [];
+
+    function initGifStatus() {
+        isGifInit = [];
+        gifId = [];
+        images.forEach(entry => {
+            isGifInit.push(false);
+            gifId.push(entry.id)
+        });
+    }
+
+    // 設定在什麼情況下觸發 callback 函式
+    const options = {
+        rootMargin: '0px 0px 50px 0px',
+        threshold: 0.1
+    }
+
+    // 載入圖片的函式
+    const loadImage = (img) => {
+        //  取得元素上 data-src 屬性中的圖片位址
+        const src = img.getAttribute('data-src')
+        if (!src) return
+        // 設定圖片的 src 並放入圖片位址讓瀏覽器載入
+        img.src = src
+        // update monitor
+    }
+
+    // callback 函式
+    const callback = (entries, observer) => {
+        for (let i = 0; i < entries.length; i++) {
+
+            if (entries[i].isIntersecting) {
+                // 當此圖片進入 viewport 時才載入圖片
+                isGifInit[gifId.indexOf(entries[i].target.id)] = true
+                loadImage(entries[i].target)
+            } else {
+                // 只在目標元素離開 viewport 時執行這裡的工作
+                if (isGifInit[gifId.indexOf(entries[i].target.id)] == true) {
+                    // 離開元素後將Gif轉成載入圖片
+                    // loadImageDefault(entries[i].target)
+                    // 停止觀察此圖片
+                    observer.unobserve(entries[i].target)
+                }
+            }
+
+        }
+    }
+
+    // 創建一個 observer
+    let observer = new IntersectionObserver(callback, options)
+
+    // load 完畢後創建 observer
+    window.addEventListener("load", (event) => {
+        createObserver();
+    }, false);
+
+    //滑動置頂時重設 observer
+    $(document).scroll(function () {
+        if ($(document).scrollTop() == 0) {
+            createObserver();
+        }
+    })
+
+    // 觀察所有圖片
+    function createObserver() {
+        initGifStatus()
+        images.forEach(image => observer.observe(image))
+    }
+</script>

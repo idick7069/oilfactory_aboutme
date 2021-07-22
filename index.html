@@ -1,0 +1,207 @@
+<html>
+
+<head>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript" src="./libgif.js"></script>
+	<script type="text/javascript" src="./rubbable.js"></script>
+</head>
+
+<body>
+	<p>商店的<strong>關於我們</strong>頁面是非常重要的，因此顧客將通過瀏覽此頁面來瞭解您的商店。此頁面的內容可以包括以下部分：</p>
+
+	<ul>
+		<li>介紹您的公司</li>
+		<li>商店主要銷售商品類型</li>
+		<li>公司地址</li>
+		<li>介紹您的公司</li>
+		<li>商店主要銷售商品類型</li>
+		<li>公司地址</li>
+		<li>介紹您的公司</li>
+		<li>商店主要銷售商品類型</li>
+		<li>公司地址</li>
+		<li>介紹您的公司</li>
+		<li>商店主要銷售商品類型</li>
+		<li>公司地址</li>
+		<li>介紹您的公司</li>
+		<li>商店主要銷售商品類型</li>
+		<li>公司地址</li>
+		<li>介紹您的公司</li>
+		<li>商店主要銷售商品類型</li>
+		<li>公司地址</li>
+		<li>介紹您的公司</li>
+		<li>商店主要銷售商品類型</li>
+		<li>公司地址</li>
+		<li>介紹您的公司</li>
+		<li>商店主要銷售商品類型</li>
+		<li>公司地址</li>
+	</ul>
+
+	<p>請進入後台管理的<a href="/admin/pages">頁面&amp;部落格</a>，修改此頁面內容。</p>
+	<div class="gif_container">
+		<img class="gif" src="./4.png" rel:animated_src="./1.gif" rel:auto_play="0" width="467" height="375" />
+	</div>
+	<br>
+	<ul>
+		<li>介紹您的公司</li>
+		<li>商店主要銷售商品類型</li>
+		<li>公司地址</li>
+		<li>介紹您的公司</li>
+		<li>商店主要銷售商品類型</li>
+		<li>公司地址</li>
+		<li>介紹您的公司</li>
+		<li>商店主要銷售商品類型</li>
+		<li>公司地址</li>
+		<li>介紹您的公司</li>
+		<li>商店主要銷售商品類型</li>
+		<li>公司地址</li>
+	</ul>
+	<div class="gif_container">
+		<img class="gif" src="./4.png" rel:animated_src="./1.gif" rel:auto_play="0" width="467" height="375" />
+	</div>
+	<br>
+	<div class="gif_container">
+		<img class="gif" src="./4.png" rel:animated_src="./1.gif" rel:auto_play="0" width="467" height="375" />
+	</div>
+	<br>
+	<ul>
+		<li>介紹您的公司</li>
+		<li>商店主要銷售商品類型</li>
+		<li>公司地址</li>
+		<li>介紹您的公司</li>
+		<li>商店主要銷售商品類型</li>
+		<li>公司地址</li>
+		<li>介紹您的公司</li>
+		<li>商店主要銷售商品類型</li>
+		<li>公司地址</li>
+		<li>介紹您的公司</li>
+		<li>商店主要銷售商品類型</li>
+		<li>公司地址</li>
+	</ul>
+	<div class="gif_container">
+		<img class="gif" " src=" ./4.png" rel:animated_src="./4.gif" rel:auto_play="0" width="467" height="375" />
+	</div>
+	<ul>
+		<li>介紹您的公司</li>
+		<li>商店主要銷售商品類型</li>
+		<li>公司地址</li>
+		<li>介紹您的公司</li>
+		<li>商店主要銷售商品類型</li>
+		<li>公司地址</li>
+		<li>介紹您的公司</li>
+		<li>商店主要銷售商品類型</li>
+		<li>公司地址</li>
+		<li>介紹您的公司</li>
+		<li>商店主要銷售商品類型</li>
+		<li>公司地址</li>
+	</ul>
+</body>
+<script type="text/javascript">
+	const numSteps = 20.0;
+
+	let boxElement;
+	boxElement = document.getElementsByClassName("gif");
+	let prevRatio = 0.0;
+	let gifContainerArray;
+	gifContainerArray = document.getElementsByClassName("gif_container");
+	var rub = [];
+
+	for (let i = 0; i < boxElement.length; i++) {
+
+		var gif = new SuperGif({
+			gif: boxElement[i],
+			max_width: 250
+		});
+		rub.push(gif);
+	}
+
+	for (let i = 0; i < rub.length; i++) {
+		rub[i].load(function () {
+			console.log('oh hey, now the gif is loaded');
+		});
+	}
+
+
+	// Set things up
+	window.addEventListener("load", (event) => {
+		console.log("有load");
+		createObserver();
+	}, false);
+
+
+	function createObserver() {
+		// let observer;
+
+		let options = {
+			root: null,
+			rootMargin: "0px",
+			threshold: buildThresholdList()
+		};
+
+		// observer = new IntersectionObserver(handleIntersect, options);
+
+		// for (let i = 0; i < gifContainerArray.length; i++) {
+		// 	console.log('set observer');
+		// 	observer.observe(gifContainerArray[i]);
+		// }
+
+		Array.from(gifContainerArray).forEach((i) => {
+			if (i) {
+				observer.observe(i);
+			}
+		})
+	}
+
+	function buildThresholdList() {
+		let thresholds = [];
+		let numSteps = 20;
+
+		for (let i = 1.0; i <= numSteps; i++) {
+			let ratio = i / numSteps;
+			thresholds.push(ratio);
+		}
+
+		thresholds.push(0);
+		return thresholds;
+	}
+
+	let observerOptions = {
+		rootMargin: '0px',
+		threshold: 0
+	}
+	var observer = new IntersectionObserver(observerCallback, observerOptions);
+
+	function observerCallback(entries, observer) {
+
+		for (let i = 0; i < entries.length; i++) {
+			if (entries[i].isIntersecting) {
+				//do something
+				console.log("下:" + i)
+			}else{
+				console.log("上" + i)
+			}
+		}
+	};
+
+	function handleIntersect(entries, observer) {
+		for (let i = 0; i < entries.length; i++) {
+			console.log(entries.length);
+			if (entries[i].intersectionRatio > prevRatio) {
+				console.log("下:" + i + rub[i].get_playing())
+				if (!rub[i].get_loading()) {
+					rub[i].play();
+				}
+				// entry.target.style.backgroundColor = increasingColor.replace("ratio", entry.intersectionRatio);
+			} else {
+				if (!rub[i].get_loading()) {
+					rub[i].pause();
+				}
+				console.log("上")
+				// entry.target.style.backgroundColor = decreasingColor.replace("ratio", entry.intersectionRatio);
+			}
+
+			prevRatio = entries[i].intersectionRatio;
+		}
+	}
+</script>
+
+</html>
